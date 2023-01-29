@@ -1,0 +1,110 @@
+column,score,dimension
+host_total_listings_count,0.058293798757372645,host
+number_of_reviews,0.052172494612628316,property
+latitude,0.0521545197974993,property
+longitude,0.046763133776373034,property
+price,0.045553456806101636,property
+host_acceptance_rate,0.037805221137058045,host
+review_scores_rating,0.03739765081891545,reviews
+host_response_rate,0.027743128961225945,host
+maximum_nights,0.027363159202880415,property
+extra_people,0.022420168399352597,property
+minimum_nights,0.02215538946199583,property
+accommodates,0.020801383827983747,property
+host_response_time-nan,0.015965927104349714,host
+review_scores_value,0.015156190162636063,reviews
+guests_included,0.014956632526062092,property
+beds,0.013562686901791587,property
+review_scores_cleanliness,0.013488187867840305,reviews
+bedrooms,0.013171970767252237,property
+review_scores_accuracy,0.013155237045728985,reviews
+amenities-Essentials,0.011866413649293242,property
+review_scores_location,0.011861655664555912,reviews
+review_scores_communication,0.010950117371099697,reviews
+bathrooms,0.010755541736597651,property
+cancellation_policy-strict,0.010364649493573718,property
+host_verifications-manual_offline,0.01026247767138376,host
+amenities-Cable TV,0.009480612197760934,property
+host_verifications-jumio,0.009212988875136002,host
+cancellation_policy-moderate,0.009212924642557891,property
+review_scores_checkin,0.009192518297891538,reviews
+host_verifications-kba,0.00914127184812498,host
+amenities-Family/Kid Friendly,0.0091098112463681,property
+amenities-First Aid Kit,0.009076335304303202,property
+amenities-Iron,0.009064851238542934,property
+host_response_time-within a few hours,0.008826441238174406,host
+amenities-Buzzer/Wireless Intercom,0.008796263966863855,property
+amenities-Shampoo,0.00875369712668173,property
+amenities-Fire Extinguisher,0.008379975295758693,property
+amenities-Laptop Friendly Workspace,0.008266788519023578,property
+amenities-24-Hour Check-in,0.008215386626592576,property
+amenities-Hangers,0.008209775188227377,property
+amenities-Washer,0.007808805607640167,property
+amenities-Free Parking on Premises,0.007640995894438921,property
+host_response_time-within an hour,0.0075910897133877634,host
+amenities-Carbon Monoxide Detector,0.007418587766911274,property
+property_type-House,0.0073773666969555,property
+amenities-Air Conditioning,0.007329761997389418,property
+amenities-Internet,0.007303777773792289,property
+amenities-Elevator in Building,0.007295760952007992,property
+host_verifications-facebook,0.007290478406826501,host
+amenities-Hair Dryer,0.0069867946001800066,property
+amenities-Dryer,0.006976371264494696,property
+host_identity_verified-t,0.0068235486747633455,host
+amenities-TV,0.006673349738160888,property
+host_is_superhost-t,0.006636945104804792,host
+instant_bookable-t,0.006596988910379142,property
+amenities-translation missing: en.hosting_amenity_50,0.00639933916924906,property
+room_type-Private room,0.006266286476768099,property
+amenities-Safety Card,0.006264322665307037,property
+amenities-Pets Allowed,0.0058864396383203664,property
+host_response_time-within a day,0.00577455963447728,host
+amenities-Smoke Detector,0.005762372906281358,property
+amenities-Indoor Fireplace,0.005297847982355801,property
+amenities-Gym,0.005222771298847838,property
+property_type-Condominium,0.004987430425003267,property
+amenities-Lock on Bedroom Door,0.0049241726921210255,property
+amenities-translation missing: en.hosting_amenity_49,0.004799338621782951,property
+amenities-Pets live on this property,0.004614433237439154,property
+amenities-Breakfast,0.00399873723744253,property
+amenities-Dog(s),0.00395506785741154,property
+amenities-Kitchen,0.003946644120897949,property
+property_type-Townhouse,0.0038676291435972526,property
+cancellation_policy-super_strict_30,0.0038015946617226547,property
+amenities-Cat(s),0.0034054962068874495,property
+host_verifications-manual_online,0.003391066162948536,host
+amenities-Doorman,0.003290699059651276,property
+require_guest_phone_verification-t,0.003086953883049783,property
+amenities-Hot Tub,0.0029202483339228107,property
+host_verifications-google,0.0028206168134828134,host
+amenities-Wheelchair Accessible,0.0027329814538549664,property
+amenities-Pool,0.0027324051484379297,property
+amenities-Suitable for Events,0.002664176482486519,property
+amenities-Heating,0.0025191756558700547,property
+bed_type-Real Bed,0.002506214686714582,property
+host_verifications-amex,0.0022536783858112253,host
+host_verifications-linkedin,0.002186798667105144,host
+amenities-Smoking Allowed,0.0018665869961699316,property
+amenities-Wireless Internet,0.001839146435426625,property
+bed_type-Futon,0.00160225881789843,property
+property_type-Loft,0.0011191377360952215,property
+host_verifications-email,0.0011189308055588548,host
+room_type-Shared room,0.0010625535618397968,property
+require_guest_profile_picture-t,0.0010177786390858019,property
+bed_type-Pull-out Sofa,0.0006889350348414587,property
+property_type-Bed & Breakfast,0.0006478297325269222,property
+host_has_profile_pic-t,0.00028016708574214293,host
+amenities-Other pet(s),0.00026028847519721297,property
+host_verifications-reviews,0.00025949065039779505,host
+amenities-Free Parking on Street,0.000250297523866399,property
+host_verifications-phone,0.00022224978987328884,host
+amenities-Washer / Dryer,0.0002113950715654395,property
+property_type-Guesthouse,0.00018492417189485726,property
+host_verifications-sent_id,0.00016832822055167968,host
+host_verifications-weibo,0.00015747438220384963,host
+property_type-Villa,0.00014346907701276904,property
+property_type-Other,0.00011866087791512922,property
+bed_type-Couch,0.00011190228361789397,property
+property_type-Boat,9.136131214507552e-05,property
+property_type-Dorm,8.448847343071132e-05,property
+amenities-Paid Parking Off Premises,1.3026915074181282e-05,property
