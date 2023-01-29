@@ -23,3 +23,57 @@ Listings data is the main data source, it describes the Airbnb property and the 
 Here is a dictionary with all the select columns and the dimension to which they belong, more information about what each column means can be reviewed [here](http://insideairbnb.com/get-the-data/).
 
 ![boston_listing_selectcolumns](https://user-images.githubusercontent.com/50749963/215360160-3a9e9d7e-95da-48ab-bc11-38e9a3954ba0.jpg)
+
+### Data preparation
+
+calculate the occupancy percentage
+
+```
+# Drop price column because we don't need it for our analysis
+boston_calendar = boston_calendar.drop('price', axis=1)
+# Get one column for each variable on for t(true) and one for f(false)
+boston_calendar = pd.concat([boston_calendar.drop('available', axis=1), pd.get_dummies(boston_calendar['available'], prefix='available', prefix_sep='_')], axis=1)
+# Group by each list id by adding the number of times each list_id is available and unavailable
+boston_occupation = boston_calendar.groupby("listing_id").sum()
+# Add a column with the occupancy percentage, which is the number of days occupied divided by the total number of days registered
+boston_occupation["occupation_percentage"] = boston_occupation["available_f"]*100/(boston_occupation["available_f"]+boston_occupation["available_t"])
+```
+
+Function to transform then occupation percentage to a categorical value
+
+```
+def percentage_to_categorical(value,levels):
+    '''
+    INPUT
+    value - A integer or float value from 0 to 100 
+    levels -The number of levels or categories into which the 100 percent will be divided 
+    
+    OUTPUT
+    level - A integer that represent the level or category to which the value belongs
+    
+    This function return the category to which the value belongs,given the number of levels.
+    '''
+    # Ensures that the value is float
+    value = float(value)
+    # Defines the upper limit
+    up_limit = 100
+    # Defines the value that each range will have
+    step = 100/levels
+    level = levels
+    while level > 0:
+        if value <= up_limit and value > (up_limit-step):
+            return level
+        else:
+            level -= 1
+            up_limit -= step
+```
+Apply the function and create a consolidate dataframe with all the listings data and the ocupation percentage
+```
+# Apply function
+boston_occupation["occupation_percentage_categoric"] = boston_occupation["occupation_percentage"].apply(lambda x: percentage_to_categorical(x,3))
+# Drop columns will no longer be used
+boston_occupation = boston_occupation.drop(["available_f","available_t","occupation_percentage"], axis=1)
+# Create a consolidate dataframe with all the listings data and the ocupation percentage
+df = pd.merge(boston_listings, boston_occupation,left_on="id",right_on="listing_id", how="inner")
+```
+
