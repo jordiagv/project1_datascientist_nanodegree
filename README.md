@@ -26,7 +26,7 @@ Here is a dictionary with all the select columns and the dimension to which they
 
 ### Data preparation
 
-calculate the occupancy percentage
+Calculate the occupancy percentage
 
 ```
 # Drop price column because we don't need it for our analysis
@@ -67,7 +67,7 @@ def percentage_to_categorical(value,levels):
             level -= 1
             up_limit -= step
 ```
-Apply the function and create a consolidate dataframe with all the listings data and the ocupation percentage
+Apply the function and create a consolidate dataframe with all the listings data and the ocupation percentage categoric
 ```
 # Apply function
 boston_occupation["occupation_percentage_categoric"] = boston_occupation["occupation_percentage"].apply(lambda x: percentage_to_categorical(x,3))
@@ -75,5 +75,70 @@ boston_occupation["occupation_percentage_categoric"] = boston_occupation["occupa
 boston_occupation = boston_occupation.drop(["available_f","available_t","occupation_percentage"], axis=1)
 # Create a consolidate dataframe with all the listings data and the ocupation percentage
 df = pd.merge(boston_listings, boston_occupation,left_on="id",right_on="listing_id", how="inner")
+```
+Function that uses aws comprehend to send the reviews of each listing and returns a csv file with the average of each sentiment per listing
+```
+def sentiment_comments_todict(df,client):
+    '''
+    INPUT
+    df - Boston reviews dataframe
+    client - Boto3 comprehend client
+    
+    OUTPUT
+    mean_df - A dataframe with the mean sentiment score per listing
+    '''
+    result_dict = {}
+    size = len(df)
+    general_count,correct_count,fail_count = 1,1,1
+    for index, row in df.iterrows():
+        general_percentage = round(general_count*100/size,2)
+        correct_percentage =round(correct_count*100/general_count,2)
+        fail_percentage = round(fail_count*100/general_count,2)
+        print("Progress:{}%, Correct:{}%, Fail:{}% ............".format(general_percentage,correct_percentage,
+                                                                        fail_percentage),end='\r')
+        general_count += 1
+        # Extract listing id and comment from row
+        listing_id = row[0]
+        comment = row[5]
+        # Use aws comprehend to extract the sentiment of the comment
+        try:
+            # Use aws comprehend to detect the sentiment of the select comment
+            response = client.detect_sentiment(Text=comment,LanguageCode='en')
+            # Add data to the dictionary
+            if listing_id not in result_dict.keys():
+                result_dict[listing_id]={"Positive":[response["SentimentScore"]["Positive"]],
+                                         "Negative":[response["SentimentScore"]["Negative"]],
+                                         "Neutral":[response["SentimentScore"]["Neutral"]],
+                                         "Mixed":[response["SentimentScore"]["Mixed"]]}
+            else:
+                result_dict[listing_id]["Positive"].append(response["SentimentScore"]["Positive"])
+                result_dict[listing_id]["Negative"].append(response["SentimentScore"]["Negative"])
+                result_dict[listing_id]["Neutral"].append(response["SentimentScore"]["Neutral"])
+                result_dict[listing_id]["Mixed"].append(response["SentimentScore"]["Mixed"])
+
+            correct_count += 1
+        except:
+            fail_count += 1
+            continue
+            
+    resume_dict = {}
+    # Obtain the mean of each sentiment per listing
+    for listing_id in result_dict.keys():
+        mean_positive = round(sum(result_dict[listing_id]["Positive"])*100/len(result_dict[listing_id]["Positive"]),2)
+        mean_negative = round(sum(result_dict[listing_id]["Negative"])*100/len(result_dict[listing_id]["Negative"]),2)
+        mean_neutral = round(sum(result_dict[listing_id]["Neutral"])*100/len(result_dict[listing_id]["Neutral"]),2)
+        mean_mixed = round(sum(result_dict[listing_id]["Mixed"])*100/len(result_dict[listing_id]["Mixed"]),2)
+        number_reviews = len(result_dict[listing_id]["Positive"])
+
+        resume_dict[listing_id]={"mean_positive":mean_positive,"mean_negative":mean_negative,"mean_neutral":mean_neutral,
+                                "mean_mixed":mean_mixed,"number_reviews":number_reviews}
+        
+    # Transform the dictionary with sentiment by listing to dataframe  
+    mean_df = pd.DataFrame.from_dict(resume_dict,orient='index')
+    mean_df.index.name = 'listing_id'
+    # Save the dataframe as a csv file
+    mean_df.to_csv("mean_sentiment_comments.csv") 
+    
+    return mean_df
 ```
 
