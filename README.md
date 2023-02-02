@@ -76,7 +76,7 @@ boston_occupation = boston_occupation.drop(["available_f","available_t","occupat
 # Create a consolidate dataframe with all the listings data and the ocupation percentage
 df = pd.merge(boston_listings, boston_occupation,left_on="id",right_on="listing_id", how="inner")
 ```
-Function that uses aws comprehend to send the reviews of each listing and returns a csv file with the average of each sentiment per listing
+Function that uses aws comprehend to send the reviews of each property and returns a csv file with the average of each sentiment per property
 ```
 def sentiment_comments_todf(df,client):
     '''
@@ -85,7 +85,7 @@ def sentiment_comments_todf(df,client):
     client - Boto3 comprehend client
     
     OUTPUT
-    mean_df - A dataframe with the mean sentiment score per listing
+    mean_df - A dataframe with the mean sentiment score per property
     '''
     result_dict = {}
     size = len(df)
@@ -122,7 +122,7 @@ def sentiment_comments_todf(df,client):
             continue
             
     resume_dict = {}
-    # Obtain the mean of each sentiment per listing
+    # Obtain the mean of each sentiment per property
     for listing_id in result_dict.keys():
         mean_positive = round(sum(result_dict[listing_id]["Positive"])*100/len(result_dict[listing_id]["Positive"]),2)
         mean_negative = round(sum(result_dict[listing_id]["Negative"])*100/len(result_dict[listing_id]["Negative"]),2)
@@ -133,7 +133,7 @@ def sentiment_comments_todf(df,client):
         resume_dict[listing_id]={"mean_positive":mean_positive,"mean_negative":mean_negative,"mean_neutral":mean_neutral,
                                 "mean_mixed":mean_mixed,"number_reviews":number_reviews}
         
-    # Transform the dictionary with sentiment by listing to dataframe  
+    # Transform the dictionary with sentiment by property to dataframe  
     mean_df = pd.DataFrame.from_dict(resume_dict,orient='index')
     mean_df.index.name = 'listing_id'
     # Save the dataframe as a csv file
@@ -141,7 +141,7 @@ def sentiment_comments_todf(df,client):
     
     return mean_df
 ```
-Open the csv file with the average of each sentiment per listing and merge this data with all the listings data and the ocupation percentage categoric
+Open the csv file with the average of each sentiment per property and merge this data with all the property data and the ocupation percentage categoric
 ```
 # Open the csv file obtained with the function sentiment_comments_todf
 boston_sentiment_comments = pd.read_csv("mean_sentiment_comments.csv")
@@ -151,3 +151,16 @@ boston_sentiment_comments.columns = ['listing_id', 'reviews_sentiment_positive',
 # Create a consolidate dataframe with all the listings data, the ocupation percentage categoric and the sentiment analysis
 df = pd.merge(df, boston_sentiment_comments,left_on="id",right_on="listing_id", how="inner")
 ```
+Filters the consolidated dataframe to ensure that it contains only boston properties and create a dataframe with the column name and the percent of missing values per column
+```
+# Create a dataframe with the column name and the percent of missing values per column
+percent_missing = df.isnull().sum()*100/len(df)
+
+df_nullrows_percent = pd.DataFrame({'column_name': df.columns,
+                                 'percent_missing': percent_missing}).reset_index(drop=True)
+
+# Filter and display missing values dataframe
+df_nullrows_percent[df_nullrows_percent["percent_missing"]>0].sort_values(by=['percent_missing'],ascending=False)
+```
+![columns_missing_Values](https://user-images.githubusercontent.com/50749963/216449634-3b3ede72-7f69-49b6-8b5f-c7b95e54d8b5.jpg)
+
