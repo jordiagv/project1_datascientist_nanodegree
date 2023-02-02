@@ -78,7 +78,7 @@ df = pd.merge(boston_listings, boston_occupation,left_on="id",right_on="listing_
 ```
 Function that uses aws comprehend to send the reviews of each listing and returns a csv file with the average of each sentiment per listing
 ```
-def sentiment_comments_todict(df,client):
+def sentiment_comments_todf(df,client):
     '''
     INPUT
     df - Boston reviews dataframe
@@ -141,4 +141,13 @@ def sentiment_comments_todict(df,client):
     
     return mean_df
 ```
-
+Open the csv file with the average of each sentiment per listing and merge this data with all the listings data and the ocupation percentage categoric
+```
+# Open the csv file obtained with the function sentiment_comments_todf
+boston_sentiment_comments = pd.read_csv("mean_sentiment_comments.csv")
+# Rename the columns
+boston_sentiment_comments.columns = ['listing_id', 'reviews_sentiment_positive', 'reviews_sentiment_negative',
+                                     'reviews_sentiment_neutral','reviews_sentiment_mixed','number_sentiment_reviews']
+# Create a consolidate dataframe with all the listings data, the ocupation percentage categoric and the sentiment analysis
+df = pd.merge(df, boston_sentiment_comments,left_on="id",right_on="listing_id", how="inner")
+```
