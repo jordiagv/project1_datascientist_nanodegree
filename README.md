@@ -164,3 +164,34 @@ df_nullrows_percent[df_nullrows_percent["percent_missing"]>0].sort_values(by=['p
 ```
 ![columns_missing_Values](https://user-images.githubusercontent.com/50749963/216449634-3b3ede72-7f69-49b6-8b5f-c7b95e54d8b5.jpg)
 
+-Drop columns: square_feet, security_deposit and cleaning_fee because they have a very high percentage of missing values, and are not critical variables for the analysis<br>
+-Review columns, host_response_rate and host_acceptace_rate have two to nine percent of missing values but they are important columns, so they will be filled with the mean<br>
+-Host_response_time have 8.3 percent of missing values but is an important column so I will use a dummy nan column for the missing values<br>
+-Columns: zipcode,bathrooms,bedrooms,host_location,beds and property_type have a very low percentage of missing values so for those columns the rows that contain nan values will be removed<br>
+```
+# Drop columns
+df = df.drop(["square_feet","security_deposit","cleaning_fee"],axis=1)
+# Extract the % sign and transform the value to float.
+df['host_response_rate'] = df['host_response_rate'].str.replace('%', '', regex=False).astype(float)
+df['host_acceptance_rate'] = df['host_acceptance_rate'].str.replace('%', '', regex=False).astype(float)
+# Extract the $ and "," sign and transform the value to float
+df['price'] = df['price'].str.replace('$', '', regex=False)
+df['price'] = df['price'].str.replace(',', '', regex=False)
+df['price'] = df['price'].astype(float)
+df['extra_people'] = df['extra_people'].str.replace('$', '', regex=False)
+df['extra_people'] = df['extra_people'].str.replace(',', '', regex=False)
+df['extra_people'] = df['extra_people'].astype(float)
+# Apply the fill mean function to the select columns
+fill_mean_cols = ["review_scores_accuracy","review_scores_location","review_scores_value","review_scores_checkin",
+                 "review_scores_communication","review_scores_cleanliness","review_scores_rating",
+                 "host_response_rate","host_acceptance_rate"]
+
+fill_mean = lambda col: col.fillna(col.mean())
+df[fill_mean_cols] = df[fill_mean_cols].apply(fill_mean)
+# Get dummy columns for host_response_time column including nan values
+var = "host_response_time"
+df = pd.concat([df.drop(var, axis=1), pd.get_dummies(df[var],prefix=var, prefix_sep='-', drop_first=True,dummy_na=True)], axis=1)
+# Drop the remaining nan values
+df = df.dropna()
+```
+
