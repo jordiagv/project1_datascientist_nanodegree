@@ -271,4 +271,4 @@ def get_dummies_strlist(df,column_name):
     # Return the new dataframe
     return df
 ```
-
+### Data modeling
