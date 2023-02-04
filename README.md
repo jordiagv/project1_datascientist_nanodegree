@@ -194,4 +194,29 @@ df = pd.concat([df.drop(var, axis=1), pd.get_dummies(df[var],prefix=var, prefix_
 # Drop the remaining nan values
 df = df.dropna()
 ```
-
+Host_location has 146 different the values, the most frequent being the city of Boston. Creating dummy variables for each host location will create 146 new columns, and for an Airbnb user doesn’t matter if the host is in Hawaii or Alaska, the only aspect that a user probably cares, is if the host is in the same city as the Airbnb. Because of this, host_location became host_isin_city, a variable that describes if the host lives in Boston or not.
+```
+def host_isin_city(host_location):
+    '''
+    INPUT
+    host_location - str value with the location of the host
+    
+    OUTPUT
+    host_isin_city - int 1 or int 0
+    
+    This function return integer 1 if the host live in Boston, integer 0 if the host does not live in boston.
+    '''
+    try:
+        clean_host_location = host_location.split(",")[0]
+        if clean_host_location == "Boston":
+            return 1
+        else:
+            return 0
+    except AttributeError:
+        return np.nan
+    
+# Apply function to create new column "host_isin_city"
+df['host_isin_city'] = df["host_location"].apply(host_isin_city)
+# Drop old column
+df = df.drop("host_location",axis=1)
+```
