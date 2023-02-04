@@ -220,3 +220,55 @@ df['host_isin_city'] = df["host_location"].apply(host_isin_city)
 # Drop old column
 df = df.drop("host_location",axis=1)
 ```
+Finally, there are two variables: host_verifications and amenities, that have something like a list but that must be cleaned and separated to create dummy columns.
+```
+def get_dummies_strlist(df,column_name):
+    '''
+    INPUT
+    df - dataframe to which function will be applied
+    column_name - name of the column of the dataframe to which the function will be applied
+    
+    OUTPUT
+    df - dataframe with corresponding dummy columns
+    
+    This function clean a str with a structure similar to a list or dictionary and return an actual list, 
+    then generate a dummy column for each unique element of the list and add the binary value.
+    '''
+
+    # Creat a list to save all possible values
+    all_items = []
+    # Characters to be remove
+    replacements = ['"',"'","[","]","{","}"]
+    # Loop through all rows in the df
+    for index, row in df.iterrows():
+        # Select the value based on the column being cleaned
+        items = row[column_name]
+        # Loop through the characters that need to be removed
+        for char in replacements:
+            if char in items:
+                # Remove the character
+                items = items.replace(char,"")
+        # Convert already cleaned str value to list
+        items = items.split(",")
+        # Loop through the items in the list
+        for item in items:
+            # Check that the item has at least one character
+            if len(item) != 0:
+                # Clears the item in case it has empty spaces
+                clean_item = item.strip()
+                clean_item = "{}-{}".format(column_name,clean_item)
+                # Check that a column already exists for that item
+                if clean_item in df.columns:
+                    # If exists assign a value of 1 to that row and column
+                    df.loc[index, clean_item] = 1
+                else:
+                    # If it does not exist create the column and then assign the value of 1 to that row and column
+                    df[clean_item] = 0
+                    df.loc[index, clean_item] = 1
+                    
+    # Drop the original column that was transformed
+    df = df.drop([column_name], axis=1)
+    # Return the new dataframe
+    return df
+```
+
