@@ -272,3 +272,88 @@ def get_dummies_strlist(df,column_name):
     return df
 ```
 ### Data modeling
+
+Function to use the get_dummies method and generate the dummy columns for all the dataframes of the experiment.
+```
+def dummi_variables_multipledfs(dfs):
+    '''
+    INPUT
+    dfs - A dictionary with one or more pandas dataframe with categorical variables you want to dummy
+    
+    OUTPUT
+    result_dict - A dictionary with the input pandas dataframes but with dummy columns for each of the categorical columns
+    '''
+    # Start an empty dictionary
+    result_dict = {}
+    # Iterate over dictionary keys
+    for key in dfs.keys():
+        # Extract the pandas dataframe associated with that key
+        df = dfs[key]
+        # Pull a list of the column names of the categorical variables
+        cat_vars = df.select_dtypes(include=['object']).copy().columns
+        for var in  cat_vars:
+            # For each cat add dummy var, drop original column
+            df = pd.concat([df.drop(var, axis=1), pd.get_dummies(df[var],prefix=var, prefix_sep='-', drop_first=True)], axis=1)
+        # Add to the result dictionary the new dataframe with dummy columns 
+        result_dict[key]=df
+    return result_dict
+```
+Function to use the random forest classifier algorithm n times per dataframe, obtaining the mean accuracy..
+```
+def experiment_randomforestclassifier(exp_dict,n_repetitions):
+    '''
+    INPUT
+    exp_dict - A dictionary with one or more pandas dataframe
+    n_repetitions -Number of times to run Random forest classifier
+ 
+    OUTPUT
+    level - A dictionary with the mean accuracy per dataframe obtain with the random forest classifier
+    
+    '''
+    result_dict = {}
+    count = 0
+    while count < n_repetitions:
+        for key in exp_dict.keys():
+            df = exp_dict[key]
+            #Split data into an X matrix and a response vector y
+            y = df['occupation_percentage_categoric']
+            x = df.drop('occupation_percentage_categoric', axis=1)
+            # Split dataset into training set and test set
+            x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+            #Create a Gaussian Classifier
+            rfc=RandomForestClassifier(n_estimators=100,random_state=42)
+            #Train the model using the training sets y_pred=clf.predict(X_test)
+            rfc.fit(x_train,y_train)
+            # Generate prediction
+            y_pred=rfc.predict(x_test)
+            # Obtain accuracy
+            accuracy = metrics.accuracy_score(y_test, y_pred)
+            # features
+            feature_importance = pd.Series(rfc.feature_importances_,index=list(x.columns)).sort_values(ascending=False)
+            # final dict
+            try:
+                result_dict[key]["accuracy"] += accuracy
+            except KeyError:
+                result_dict[key] = {"accuracy":accuracy}
+        count += 1
+        
+    # Get the mean, update the result_dict with that value, and graph the results
+    x_axis, y_axis = [],[]
+    for key in result_dict.keys():
+        accuracy_mean = (result_dict[key]["accuracy"])/n_repetitions
+        result_dict[key]["accuracy"] = accuracy_mean
+        x_axis.append(key)
+        y_axis.append(accuracy_mean)
+    # Plot the experiment results
+    plt.bar(x_axis, y_axis)
+    plt.title('Accuracy per experiment')
+    plt.xlabel('Experiment')
+    plt.ylabel('Accuracy')
+    # Get the dowm limit of the y axis
+    down_ylim = (math.floor(min(y_axis)*10)/10)
+    up_ylim = (math.ceil(max(y_axis)*10)/10)
+    plt.ylim(down_ylim,up_ylim)
+    plt.show()
+    
+    return result_dict
+```
