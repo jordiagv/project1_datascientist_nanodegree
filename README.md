@@ -3,8 +3,13 @@ Repository for project 1 of udacity data scientist nanodegree
 
 ## 1. Installations
 
+## 2. Project Motivation
 
-## 4. How to Interact 
+## 2. File Descriptions
+
+## 3. File Descriptions
+
+## 4. How to Interact with project
 
 ### Data understanding
 
@@ -478,4 +483,8 @@ To see all the feature importance in detail [click here](https://plotly.com/~jor
 <div>
     <a href="https://plotly.com/~jordiagv/1/?share_key=dPmkofT2Y1sYRFtxulc1kR" target="_blank" title="score_by_feature" style="display: block; text-align: center;"><img src="https://plotly.com/~jordiagv/1.png?share_key=dPmkofT2Y1sYRFtxulc1kR" alt="score_by_feature" style="max-width: 100%;width: 1000px;"  width="1000" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
 </div>
+
+## 5. Licensing, Authors, Acknowledgements
+
+
 
