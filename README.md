@@ -3,6 +3,14 @@ Repository for project 1 of udacity data scientist nanodegree
 
 ## 1. Installations
 
+Python version 3.x. It is recommended to use anaconda which includes the following packages: pandas, numpy, math, matplotlib, seaborn and sklearn
+
+Other required libraries that are not included in the Anaconda package:
+
+boto3<br>
+Version: 1.10.33<br>
+Summary: The AWS SDK for Python
+
 ## 2. Project Motivation
 
 ## 2. File Descriptions
