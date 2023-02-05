@@ -1,6 +1,11 @@
 # project1_datascientist_nanodegree
 Repository for project 1 of udacity data scientist nanodegree
 
+## 1. Installations
+
+
+## 4. How to Interact 
+
 ### Data understanding
 
 Kaggle Boston Airbnb Open Data have three files: calendar, reviews, and listings. 
