@@ -443,3 +443,28 @@ def get_dataframe_perdimension(select_df,columns_for_analysis):
 ![accuracy_dimension_exp](https://user-images.githubusercontent.com/50749963/216795943-10cc5e56-6130-4df3-ad0a-f713e8211ab3.jpg)
 ![accuracy_dimension_exp_number](https://user-images.githubusercontent.com/50749963/216795945-2321ed94-8f18-4714-9fae-8d87c8f40d30.jpg)
 
+### Result evaluation
+
+Finally, random forest classifier was applied to the selected dataframe to obtain the final accuracy and the feature importance.
+
+```
+#Split data into an X matrix and a response vector y
+y = select_df['occupation_percentage_categoric']
+x = select_df.drop('occupation_percentage_categoric', axis=1)
+# Split dataset into training set and test set
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+#Create a Gaussian Classifier
+rfc=RandomForestClassifier(n_estimators=100,random_state=42)
+#Train the model using the training sets y_pred=clf.predict(X_test)
+rfc.fit(x_train,y_train)
+# Generate prediction
+y_pred=rfc.predict(x_test)
+# Obtain accuracy
+accuracy = metrics.accuracy_score(y_test, y_pred)
+# Create a dataframe with the score per column (variable or feature)
+feature_importance = pd.DataFrame([list(x.columns),rfc.feature_importances_]).transpose()
+feature_importance = feature_importance.rename(columns={1:'score',0:'column'}).sort_values(by='score',ascending=False)
+feature_importance = pd.merge(feature_importance,df_column_dimension ,on='column', how="inner")
+```
+![final_accuracy_and_featureimportance](https://user-images.githubusercontent.com/50749963/216796211-34ec127f-7487-4af2-ab88-8d808346241e.jpg)
+
