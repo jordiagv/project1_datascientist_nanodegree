@@ -440,3 +440,6 @@ def get_dataframe_perdimension(select_df,columns_for_analysis):
 
     return df_per_dimension, df_column_dimension
 ```
+![accuracy_dimension_exp](https://user-images.githubusercontent.com/50749963/216795943-10cc5e56-6130-4df3-ad0a-f713e8211ab3.jpg)
+![accuracy_dimension_exp_number](https://user-images.githubusercontent.com/50749963/216795945-2321ed94-8f18-4714-9fae-8d87c8f40d30.jpg)
+
