@@ -472,6 +472,5 @@ To see all the feature importance in detail [click here](https://plotly.com/~jor
 
 <div>
     <a href="https://plotly.com/~jordiagv/1/?share_key=dPmkofT2Y1sYRFtxulc1kR" target="_blank" title="score_by_feature" style="display: block; text-align: center;"><img src="https://plotly.com/~jordiagv/1.png?share_key=dPmkofT2Y1sYRFtxulc1kR" alt="score_by_feature" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="jordiagv:1" sharekey-plotly="dPmkofT2Y1sYRFtxulc1kR" src="https://plotly.com/embed.js" async></script>
 </div>
 
