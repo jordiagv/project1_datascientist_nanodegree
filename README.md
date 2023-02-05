@@ -468,9 +468,7 @@ feature_importance = pd.merge(feature_importance,df_column_dimension ,on='column
 ```
 ![final_accuracy_and_featureimportance](https://user-images.githubusercontent.com/50749963/216796211-34ec127f-7487-4af2-ab88-8d808346241e.jpg)
 
-To see all the feature importance in detail, click here.
+To see all the feature importance in detail [click here](https://plotly.com/~jordiagv/1/).
 
-<div>
-    <a href="https://plotly.com/~jordiagv/1/?share_key=dPmkofT2Y1sYRFtxulc1kR" target="_blank" title="score_by_feature" style="display: block; text-align: center;"><img src="https://plotly.com/~jordiagv/1.png?share_key=dPmkofT2Y1sYRFtxulc1kR" alt="score_by_feature" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
-    <script data-plotly="jordiagv:1" sharekey-plotly="dPmkofT2Y1sYRFtxulc1kR" src="https://plotly.com/embed.js" async></script>
-</div>
+<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~jordiagv/1.embed"></iframe>
+
