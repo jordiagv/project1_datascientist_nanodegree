@@ -357,3 +357,37 @@ def experiment_randomforestclassifier(exp_dict,n_repetitions):
     
     return result_dict
 ```
+Experiment related to location variables
+```
+# Defines the dataframe with only zipcode for location variable
+df_with_zipcode = df.drop(['latitude','longitude','neighbourhood_cleansed'],axis=1)
+# Defines the dataframe with only coordinates for location variable
+df_with_coordinates = df.drop(['zipcode','neighbourhood_cleansed'],axis=1)
+# Defines the dataframe with only neighbourhood for location variable
+df_with_neighbourhood = df.drop(['zipcode','latitude','longitude'],axis=1)
+# Create de experiment dictionary
+location_experiment = {"df_with_zipcode":df_with_zipcode,"df_with_coordinates":df_with_coordinates,
+                    "df_with_neighbourhood":df_with_neighbourhood}
+```
+![accuracy_location_exp](https://user-images.githubusercontent.com/50749963/216794571-dc15e6e9-8ddb-4c56-9b13-a3f7f9efae72.jpg)
+
+![accuracy_location_exp_numbers](https://user-images.githubusercontent.com/50749963/216794837-55155b7b-9107-453a-9f1f-b0883d1c39fd.jpg)
+
+Experiment related to reviews using coordinates as the location variable
+```
+# Dataframe with original review variables, sentiment variables, and coordinates as location variable
+df_withsentiment = df.drop(['zipcode','neighbourhood_cleansed'],axis=1)
+# Dataframe with original review variables and coordinates as location variable
+df_withoutsentiment = df.drop(['reviews_sentiment_positive', 'reviews_sentiment_negative','reviews_sentiment_neutral',
+                               'reviews_sentiment_mixed','number_sentiment_reviews','zipcode','neighbourhood_cleansed'],axis=1)
+# Dataframe with sentiment variables without original review variables and coordinates as location variable
+df_without_originalreviews = df.drop(['number_of_reviews','review_scores_rating','review_scores_accuracy','review_scores_cleanliness',
+                                      'review_scores_checkin','review_scores_communication','review_scores_location',
+                                      'review_scores_value','zipcode','neighbourhood_cleansed'],axis=1)
+# Create de experiment dictionary
+sentiment_experiment = {'withsentiment':df_withsentiment,'withoutsentiment':df_withoutsentiment,
+                             'without_originalreviews':df_without_originalreviews}
+```
+![accuracy_sentiment_exp](https://user-images.githubusercontent.com/50749963/216794803-159f1271-c553-4647-b7f8-e16b397f6b2c.jpg)
+
+
