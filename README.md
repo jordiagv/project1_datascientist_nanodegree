@@ -392,3 +392,51 @@ sentiment_experiment = {'withsentiment':df_withsentiment,'withoutsentiment':df_w
 
 ![accuracy_sentiment_exp_number](https://user-images.githubusercontent.com/50749963/216794892-66c461a4-d86a-4deb-b68d-fbce59af06fb.jpg)
 
+The final selected dataframe contains the coordinates as location variable and does not contain the sentiment of the reviews. The following function was used to separate the final dataframe by dimension and perform the last experiment.
+```
+def get_dataframe_perdimension(select_df,columns_for_analysis):
+    '''
+    INPUT
+    select_df - dataframe with the final select columns
+    columns_for_analysis - A dictionary with the columns of interest and the dimensions to which they belong
+ 
+    OUTPUT
+    df_per_dimension - A pandas datraframe per dimension
+    df_column_dimension - A pandas dataframe with the column and the  dimension to which it belongs
+    '''
+    # Dictionary to add columns per dimension
+    columns_per_dimension = {}
+    # Loop through dataframe columns
+    for dummy in select_df.columns:
+        # Obtain the original name of the column before get_dummies
+        column = dummy.split("-")[0]
+        # Check if the column is in our columns of interest and get its dimension
+        if column in columns_for_analysis.keys():
+            column_dimension = columns_for_analysis[column]
+            # Add the values to the dictionary
+            if column_dimension in columns_per_dimension.keys() and column_dimension != "output":
+                columns_per_dimension[column_dimension].append(dummy)
+            elif column_dimension not in columns_per_dimension.keys() and column_dimension != "output":
+                columns_per_dimension[column_dimension] = [dummy,"occupation_percentage_categoric"]
+
+    # Dictionary to add dataframe per dimension
+    df_per_dimension = {}
+    # Loop through dimensions, get the columns from that dimension and filter the datafrane to add to the dictionaray
+    for dimension in columns_per_dimension.keys():
+        columns = columns_per_dimension[dimension]
+        df = select_df[columns]
+        df_per_dimension[dimension] = df
+
+    # List to add the column and the dimension to which it belongs
+    column_dimension = []
+    # Loop through dimensions, get the columns from that dimension and add the pair value to the list
+    for dimension in columns_per_dimension.keys():
+        for column in columns_per_dimension[dimension]:
+            column_dimension.append([column,dimension])
+    # Create a dataframe with the column name and the dimension to which it belongs      
+    df_column_dimension = pd.DataFrame(column_dimension, columns = ['column','dimension'])
+    # Add the all dimensions dataframe to the df_per_dimension dictionary
+    df_per_dimension["all_dimensions"] = select_df
+
+    return df_per_dimension, df_column_dimension
+```
