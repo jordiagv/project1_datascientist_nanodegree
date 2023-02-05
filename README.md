@@ -471,6 +471,6 @@ feature_importance = pd.merge(feature_importance,df_column_dimension ,on='column
 To see all the feature importance in detail [click here](https://plotly.com/~jordiagv/1/).
 
 <div>
-    <a href="https://plotly.com/~jordiagv/1/?share_key=dPmkofT2Y1sYRFtxulc1kR" target="_blank" title="score_by_feature" style="display: block; text-align: center;"><img src="https://plotly.com/~jordiagv/1.png?share_key=dPmkofT2Y1sYRFtxulc1kR" alt="score_by_feature" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
+    <a href="https://plotly.com/~jordiagv/1/?share_key=dPmkofT2Y1sYRFtxulc1kR" target="_blank" title="score_by_feature" style="display: block; text-align: center;"><img src="https://plotly.com/~jordiagv/1.png?share_key=dPmkofT2Y1sYRFtxulc1kR" alt="score_by_feature" style="max-width: 100%;width: 1000px;"  width="1000" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
 </div>
 
