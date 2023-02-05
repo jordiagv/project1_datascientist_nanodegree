@@ -390,4 +390,5 @@ sentiment_experiment = {'withsentiment':df_withsentiment,'withoutsentiment':df_w
 ```
 ![accuracy_sentiment_exp](https://user-images.githubusercontent.com/50749963/216794803-159f1271-c553-4647-b7f8-e16b397f6b2c.jpg)
 
+![accuracy_sentiment_exp_number](https://user-images.githubusercontent.com/50749963/216794892-66c461a4-d86a-4deb-b68d-fbce59af06fb.jpg)
 
