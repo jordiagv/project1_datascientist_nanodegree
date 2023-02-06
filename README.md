@@ -3,7 +3,7 @@ Repository for project 1 of udacity data scientist nanodegree
 
 ## 1. Installations
 
-Python version 3.x. It is recommended to use anaconda which includes the following packages: pandas, numpy, math, matplotlib, seaborn and sklearn
+Python version 3.x. It is recommended to use anaconda which includes the following packages: pandas, numpy, math, matplotlib, seaborn and sklearn.
 
 Other required libraries that are not included in the Anaconda package:
 
@@ -13,9 +13,17 @@ Summary: The AWS SDK for Python
 
 ## 2. Project Motivation
 
-## 2. File Descriptions
-
 ## 3. File Descriptions
+
+Bonston_airbnb_data folder contains three files: calendar.csv, listings.csv, reviews.csv 
+
+project1_datascientist_nanodegree.ipynb -  main file that apply the CRISP method to analyze the information and answer the questions asked
+
+transform_reviews_aws_comprehend.ipynb - file that use boto3 (AWS comprehend) to process the reviews.
+
+feature_importance.csv - csv file with the score of each variable (feature importance) for the random forest classifier model.
+
+mean_sentiment_comments.csv - file with the sentiment of the reviews by Airbnb property (listing_id).
 
 ## 4. How to Interact with project
 
