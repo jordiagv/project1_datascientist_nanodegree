@@ -15,15 +15,15 @@ Summary: The AWS SDK for Python
 
 ## 3. File Descriptions
 
-Bonston_airbnb_data folder contains three files: calendar.csv, listings.csv, reviews.csv 
+**Boston_airbnb_data** folder contains three files: calendar.csv, listings.csv and reviews.csv from [Kaggle](https://www.kaggle.com/datasets/airbnb/boston).
 
-project1_datascientist_nanodegree.ipynb -  main file that apply the CRISP method to analyze the information and answer the questions asked
+**project1_datascientist_nanodegree.ipynb** -  main file that apply the CRISP method to analyze data and answer the questions asked
 
-transform_reviews_aws_comprehend.ipynb - file that use boto3 (AWS comprehend) to process the reviews.
+**transform_reviews_aws_comprehend.ipynb** - file that use boto3 (AWS comprehend) to process the reviews.
 
-feature_importance.csv - csv file with the score of each variable (feature importance) for the random forest classifier model.
+**feature_importance.csv** - csv file with the score of each variable (feature importance) for the random forest classifier model.
 
-mean_sentiment_comments.csv - file with the sentiment of the reviews by Airbnb property (listing_id).
+**mean_sentiment_comments.csv** - file with the sentiment of the reviews by Airbnb property (listing_id).
 
 ## 4. How to Interact with project
 
