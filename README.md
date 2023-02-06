@@ -1,5 +1,11 @@
 # project1_datascientist_nanodegree
-Repository for project 1 of udacity data scientist nanodegree
+
+Repository for project 1 of udacity data scientist nanodegree.
+
+Creating a model to predict the occupancy of an Airbnb.
+
+A data-based approach using Kaggle Boston Airbnb Open Data from 2016-09-06 to 2017-09-05.
+
 
 ## 1. Installations
 
