@@ -19,6 +19,8 @@ Summary: The AWS SDK for Python
 
 ## 2. Project Motivation
 
+Reinforce the knowledge learned in the introduction to data science module of the data scientist nanodegree program, as well as meet the requirements to deliver the project 1: write a data science blog post.
+
 ## 3. File Descriptions
 
 **Boston_airbnb_data** folder contains three files: calendar.csv, listings.csv and reviews.csv from [Kaggle](https://www.kaggle.com/datasets/airbnb/boston).
