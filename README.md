@@ -508,5 +508,6 @@ To see all the feature importance in detail [click here](https://plotly.com/~jor
 
 ## 5. Licensing, Authors, Acknowledgements
 
-
+Boston Airbnb Open Data from [Kaggle](https://www.kaggle.com/datasets/airbnb/boston).
+Code released under the [MIT License](https://github.com/twbs/bootstrap/blob/main/LICENSE)
 
