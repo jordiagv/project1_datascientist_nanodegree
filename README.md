@@ -6,6 +6,7 @@ Creating a model to predict the occupancy of an Airbnb.
 
 A data-based approach using Kaggle Boston Airbnb Open Data from 2016-09-06 to 2017-09-05.
 
+Blog post can be read [here](https://medium.com/@jandresgv51/creating-a-model-to-predict-the-occupancy-of-an-airbnb-95bc589d84cd).
 
 ## 1. Installations
 
