@@ -22,6 +22,8 @@ Summary: The AWS SDK for Python
 
 Reinforce the knowledge learned in the introduction to data science module of the data scientist nanodegree program, as well as meet the requirements to deliver the project 1: write a data science blog post.
 
+For this project, I was interested in using Kaggle Boston Airbnb Open Data to answer three questions:
+
 For this analysis I want to answer three questions:
 
 1. Which location-related variable generate a more accurate model?
