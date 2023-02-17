@@ -22,6 +22,14 @@ Summary: The AWS SDK for Python
 
 Reinforce the knowledge learned in the introduction to data science module of the data scientist nanodegree program, as well as meet the requirements to deliver the project 1: write a data science blog post.
 
+For this analysis I want to answer three questions:
+
+1. Which location-related variable generate a more accurate model?
+
+2. Can the model be improved by doing a sentiment analysis of the reviews?
+
+3. How the accuracy of the model changes with each dimension and what is the final accuracy of the model using all the selected variables?
+
 ## 3. File Descriptions
 
 **Boston_airbnb_data** folder contains three files: calendar.csv, listings.csv and reviews.csv from [Kaggle](https://www.kaggle.com/datasets/airbnb/boston).
